@@ -31,7 +31,11 @@ namespace IdentitySample
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+               
+            })
                     .AddEntityFrameworkStores<ApplicationContext>()
                     .AddDefaultTokenProviders();
         }
